@@ -1,6 +1,9 @@
 import Groq from "groq-sdk";
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+function getClient() {
+  if (!process.env.GROQ_API_KEY) throw new Error("Missing GROQ_API_KEY");
+  return new Groq({ apiKey: process.env.GROQ_API_KEY });
+}
 
 const ZONE_LABELS: Record<string, string> = {
   head: "head",
@@ -61,7 +64,7 @@ export async function generateOpeningScript(context: CallContext): Promise<strin
     `- Output only the script. No labels, no quotes, no extra text.`,
   ].join("\n");
 
-  const completion = await groq.chat.completions.create({
+  const completion = await getClient().chat.completions.create({
     model: "llama-3.1-8b-instant",
     messages: [{ role: "user", content: prompt }],
     temperature: 0.2,
@@ -93,7 +96,7 @@ export async function generateResponse(
     `- Speak calmly and clearly as if on a real emergency call.`,
   ].join("\n");
 
-  const completion = await groq.chat.completions.create({
+  const completion = await getClient().chat.completions.create({
     model: "llama-3.1-8b-instant",
     messages: [
       { role: "system", content: systemPrompt },
