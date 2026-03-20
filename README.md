@@ -1,4 +1,3 @@
-# #1 Place at Ai & Data Science for Good hackathon by WatAI & Waterloo Data & Artificial Intelligence Institute
 # Lifesaver 
 
 A 911 emergency bridge app for non-English speakers. The user taps their emergency type, answers a short visual quiz, marks injured body parts on an interactive body map, and the app places a real outbound call to 911 — speaking on their behalf using an AI-generated script and holding a live conversation with the dispatcher.
